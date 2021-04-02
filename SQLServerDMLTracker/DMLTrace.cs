@@ -248,12 +248,12 @@ SET NOCOUNT OFF')
             WHILE  @@FETCH_STATUS=0
             BEGIN
                 -- 删除日志
-                if exists (select * from sysobjects where id = object_id('Mdl_Trace_Log') and sysstat & 0xf = 3)
-                Delete From Mdl_Trace_Log where log_table=@tbl
-                if exists (select * from sysobjects where id = object_id('Mdl_Trace_Table_Log') and sysstat & 0xf = 3)
-                Delete From Mdl_Trace_Table_Log where log_table=@tbl
-                if exists (select * from sysobjects where id = object_id('Mdl_Trace_Record_Log') and sysstat & 0xf = 3)
-                Delete From Mdl_Trace_Record_Log where log_table=@tbl
+                --if exists (select * from sysobjects where id = object_id('Mdl_Trace_Log') and sysstat & 0xf = 3)
+                --Delete From Mdl_Trace_Log where log_table=@tbl
+                --if exists (select * from sysobjects where id = object_id('Mdl_Trace_Table_Log') and sysstat & 0xf = 3)
+                --Delete From Mdl_Trace_Table_Log where log_table=@tbl
+                --if exists (select * from sysobjects where id = object_id('Mdl_Trace_Record_Log') and sysstat & 0xf = 3)
+                --Delete From Mdl_Trace_Record_Log where log_table=@tbl
                 
                 -- 删除触发器
                 set @sql = 'if exists (select * from sysobjects where id = object_id(''[dbo].[' + @tr +  ']'') and sysstat & 0xf = 8)
@@ -352,9 +352,13 @@ SET NOCOUNT OFF')
             String sql = @"if exists (select * from tempdb.dbo.sysobjects where id = object_id(N'tempdb..#tmp_Mdl_Trace_tbl') and type='U')
             drop table #tmp_Mdl_Trace_tbl
 
-            Select OBJECT_NAME(parent_id) as tbl,name as tr into #tmp_Mdl_Trace_tbl from sys.triggers 
-            where name like 'tr_Mdl_Trace_%_log'
-            " + (tbls == "" ? "" : " and OBJECT_NAME(parent_id) in ('" + tbls.Replace(",", "','") + "')") + @"
+	        SELECT name as tbl,'tr_Mdl_Trace_' + name +  '_log' as tr into #tmp_Mdl_Trace_tbl from sysobjects 
+	        where type='U'
+            " + (tbls == "" ? "" : " and name in ('" + tbls.Replace(",", "','") + "')") + @"
+
+            --Select OBJECT_NAME(parent_id) as tbl,name as tr into #tmp_Mdl_Trace_tbl from sys.triggers 
+            --where name like 'tr_Mdl_Trace_%_log'
+            --" + (tbls == "" ? "" : " and OBJECT_NAME(parent_id) in ('" + tbls.Replace(",", "','") + "')") + @"
 	
             declare @tbl varchar(255), @tr varchar(255), @sql varchar(8000)
 
@@ -386,9 +390,13 @@ SET NOCOUNT OFF')
             String sql = @"if exists (select * from tempdb.dbo.sysobjects where id = object_id(N'tempdb..#tmp_Mdl_Trace_tbl') and type='U')
             drop table #tmp_Mdl_Trace_tbl
 
-            Select OBJECT_NAME(parent_id) as tbl,name as tr into #tmp_Mdl_Trace_tbl from sys.triggers 
-            where name like 'tr_Mdl_Trace_%_log'
-            " + (tbls == "" ? "" : " and OBJECT_NAME(parent_id) in ('" + tbls.Replace(",", "','") + "')") + @"
+	        SELECT name as tbl,'tr_Mdl_Trace_' + name +  '_log' as tr into #tmp_Mdl_Trace_tbl from sysobjects 
+	        where type='U'
+            " + (tbls == "" ? "" : " and name in ('" + tbls.Replace(",", "','") + "')") + @"
+
+            --Select OBJECT_NAME(parent_id) as tbl,name as tr into #tmp_Mdl_Trace_tbl from sys.triggers 
+            --where name like 'tr_Mdl_Trace_%_log'
+            --" + (tbls == "" ? "" : " and OBJECT_NAME(parent_id) in ('" + tbls.Replace(",", "','") + "')") + @"
 	
             declare @tbl varchar(255), @tr varchar(255), @sql varchar(8000)
 
