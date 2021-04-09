@@ -527,7 +527,7 @@ SET NOCOUNT OFF')
         }
 
         //模糊查询，查询全部
-        public static SqlDataReader QueryTraceLog(string connectionString, string tbl, bool bViewAlter,string dtEnd, string rowCount)
+        public static SqlDataReader QueryTraceLog(string connectionString, string tbl,bool bUseLike, bool bViewAlter,string dtEnd, string rowCount)
         {
             String sql = @"if exists (select * from sysobjects where id = object_id('dbo.Mdl_Trace_Log') and sysstat & 0xf = 3)
             begin 
@@ -541,8 +541,11 @@ SET NOCOUNT OFF')
                 Select top " + rowCount + @" IDENTITY(int ,1,1) as autoid,log_table,log_sql,log_inserted,log_deleted,log_updated,log_time,log_pid,log_guid,log_hostname,log_programname,log_spid
                 into #log
                 from Mdl_Trace_Log 
-	            where 1=1 " + (tbl == "" ? "" : " and (log_table like '%" + tbl + "%' or log_sql like '%" + tbl + @"%' 
-                                                        or log_pid like '%" + tbl + "%' or log_hostname like '%" + tbl + "%' or log_programname like '%" + tbl + "%')")
+	            where 1=1 " + (tbl == "" ? "" : " and (log_table " + (bUseLike?"like '%" + tbl + "%'":"='" + tbl + "'")+ @"
+                                                        or log_sql " + (bUseLike ? "like '%" + tbl + "%'" : "='" + tbl + "'") + @"
+                                                        or log_pid " + (bUseLike ? "like '%" + tbl + "%'" : "='" + tbl + "'") + @"
+                                                        or log_hostname " + (bUseLike ? "like '%" + tbl + "%'" : "='" + tbl + "'") + @"
+                                                        or log_programname " + (bUseLike ? "like '%" + tbl + "%')" : "='" + tbl + "')"))
                             + (dtEnd == "" ? "" : " and (log_time<='" + dtEnd + "')")
                             + (bViewAlter ? " and (log_deleted<>0 or log_inserted<>0 or log_updated<>0)" : "")
 	            + @" order by log_ts desc

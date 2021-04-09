@@ -1009,7 +1009,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "SQLServer DML Tracker 2021.04.02 by shenrg";
+            this.Text = "SQLServer DML Tracker 2021.04.09 by shenrg";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMian_FormClosed);
             this.Load += new System.EventHandler(this.FormMian_Load);

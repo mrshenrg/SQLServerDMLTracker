@@ -67,7 +67,7 @@ namespace SQLServerDMLTracker
         private void InitToolStripComboBox1(string connectionString)
         {
             this.toolStripComboBox1.Items.Clear();
-            SqlDataReader dr = MSSQLHelper.ExecuteDataReader(connectionString, "Select * from sys.databases where state_desc = 'ONLINE'");
+            SqlDataReader dr = MSSQLHelper.ExecuteDataReader(connectionString, "Select * from sys.databases where state_desc = 'ONLINE' order by name");
             if (dr.HasRows)
             {
                 while (dr.Read())
@@ -918,8 +918,13 @@ namespace SQLServerDMLTracker
 
         private void queryTraceLog(string tbl)
         {
+            queryTraceLog(tbl,true);
+        }
+
+        private void queryTraceLog(string tbl, bool bUseLike)
+        {
             string dtEnd = (this.checkEndDateTime.Checked?this.dateTimeEnd.Value.ToString():"");
-            SqlDataReader dr = DMLTrace.QueryTraceLog(connStr, tbl, this.checkBox2.Checked, dtEnd, this.numericUpDown1.Value.ToString());
+            SqlDataReader dr = DMLTrace.QueryTraceLog(connStr, tbl, bUseLike, this.checkBox2.Checked, dtEnd, this.numericUpDown1.Value.ToString());
 
             DataTable table = new DataTable();
             table.Load(dr);
@@ -930,7 +935,7 @@ namespace SQLServerDMLTracker
         {
             this.textBox2.Text = this.dataGridView1.Rows[this.dataGridView1.CurrentRow.Index].Cells[1].Value.ToString();
             this.tabControl1.SelectedIndex = 1;
-            queryTraceLog(this.textBox2.Text);
+            queryTraceLog(this.textBox2.Text,false);
         }
 
         private void dataGridView2_DoubleClick(object sender, EventArgs e)
