@@ -538,7 +538,11 @@ SET NOCOUNT OFF')
                 if not exists (select c.name,c.id from syscolumns c,sysobjects o  where c.id=o.id and o.xtype='U' and o.name='Mdl_Trace_Log' and c.name ='log_programname') 
                     alter table Mdl_Trace_Log add log_programname nvarchar(256) null
 
-                Select top " + rowCount + @" IDENTITY(int ,1,1) as autoid,log_table,log_sql,log_inserted,log_deleted,log_updated,log_time,log_pid,log_guid,log_hostname,log_programname,log_spid
+                Select top " + rowCount + @" IDENTITY(int ,1,1) as autoid,log_table,log_sql
+                    ,(case when isnull(log_inserted,0)=0 then null else log_inserted end) log_inserted
+                    ,(case when isnull(log_deleted,0)=0 then null else log_deleted end) log_deleted
+                    ,(case when isnull(log_updated,0)=0 then null else log_updated end) log_updated
+                    ,log_time,log_pid,log_guid,log_hostname,log_programname,log_spid
                 into #log
                 from Mdl_Trace_Log 
 	            where 1=1 " + (tbl == "" ? "" : " and (log_table " + (bUseLike?"like '%" + tbl + "%'":"='" + tbl + "'")+ @"
