@@ -140,5 +140,12 @@ namespace SQLServerDMLTracker
                 return conn.Database;
             }
         }
+        public static string GetDataSource(string connectionString)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                return conn.DataSource;
+            }
+        }
     }
 }

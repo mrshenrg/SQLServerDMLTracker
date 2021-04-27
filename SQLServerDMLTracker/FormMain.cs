@@ -76,6 +76,7 @@ namespace SQLServerDMLTracker
                 }
             }
 
+            toolStripStatusLabel3.Text = "SQLServer服务器[" + MSSQLHelper.GetDataSource(connStr) + "]";
             this.toolStripComboBox1.SelectedIndex = this.toolStripComboBox1.FindString(MSSQLHelper.GetDataBaseString(connectionString).ToString());
 
             toolStripButton1.Enabled = false;
