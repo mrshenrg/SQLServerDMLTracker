@@ -37,8 +37,8 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            //this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            //this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -127,22 +127,22 @@
             // 
             // shapeContainer1
             // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(429, 204);
-            this.shapeContainer1.TabIndex = 8;
-            this.shapeContainer1.TabStop = false;
+            //this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            //this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            //this.shapeContainer1.Name = "shapeContainer1";
+            //this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            //this.lineShape1});
+            //this.shapeContainer1.Size = new System.Drawing.Size(429, 204);
+            //this.shapeContainer1.TabIndex = 8;
+            //this.shapeContainer1.TabStop = false;
             // 
             // lineShape1
             // 
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 14;
-            this.lineShape1.X2 = 414;
-            this.lineShape1.Y1 = 154;
-            this.lineShape1.Y2 = 154;
+            //this.lineShape1.Name = "lineShape1";
+            //this.lineShape1.X1 = 14;
+            //this.lineShape1.X2 = 414;
+            //this.lineShape1.Y1 = 154;
+            //this.lineShape1.Y2 = 154;
             // 
             // button1
             // 
@@ -180,7 +180,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.shapeContainer1);
+            //this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -205,8 +205,8 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.TextBox textBox1;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        //private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        //private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
     }

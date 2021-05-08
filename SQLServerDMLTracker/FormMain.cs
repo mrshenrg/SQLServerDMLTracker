@@ -114,7 +114,7 @@ namespace SQLServerDMLTracker
                 tblList = getSelectedTraceTrig(this.tabControl1.SelectedIndex);
                 if (tblList.Count == 0)
                 {
-                    tbls = Microsoft.VisualBasic.Interaction.InputBox("请输入跟踪表范围，例如：TableA,TableB,..\n不输入则跟踪全部表！", "创建跟踪", "", -1, -1);
+                    //tbls = Microsoft.VisualBasic.Interaction.InputBox("请输入跟踪表范围，例如：TableA,TableB,..\n不输入则跟踪全部表！", "创建跟踪", "", -1, -1);
                     if (tbls == "" && MessageBox.Show("是否全部新建或重建跟踪触发器？", "创建跟踪", MessageBoxButtons.OKCancel) != DialogResult.OK)
                         return;
                     else if (tbls != "")
